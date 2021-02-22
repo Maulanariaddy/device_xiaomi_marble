@@ -122,7 +122,8 @@ BOARD_KERNEL_CMDLINE := \
     swinfo.fingerprint=$(AOSP_VERSION) \
     mtdoops.fingerprint=$(AOSP_VERSION) \
     allow_file_spec_access \
-    irqaffinity=0-3
+    irqaffinity=0-3 \
+    pelt=8
 
 BOARD_BOOTCONFIG := \
     androidboot.hardware=qcom \
