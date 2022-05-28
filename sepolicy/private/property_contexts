@@ -3,12 +3,6 @@ ro.boot.hwversion                      u:object_r:exported_default_prop:s0
 ro.product.marketname                  u:object_r:build_prop:s0
 ro.product.mod_device                  u:object_r:build_prop:s0
 
-# Dolby Properties
-ro.vendor.dolby.dax.version            u:object_r:exported_system_prop:s0
-ro.vendor.audio.dolby.dax.support      u:object_r:exported_system_prop:s0
-ro.vendor.audio.dolby.dax.version      u:object_r:exported_system_prop:s0
-ro.vendor.audio.dolby.surround.enable  u:object_r:exported_system_prop:s0
-
 # SettingsLib
 settingsdebug.instant.packages         u:object_r:settingslib_prop:s0
 
@@ -27,3 +21,8 @@ persist.hydra.mem_trace	       u:object_r:exported_system_prop:s0
 
 # Hardware
 ro.hardware.chipname           u:object_r:exported_default_prop:s0
+
+# Device Settings
+persist.input.velocitytracker.                  u:object_r:exported_system_prop:s0
+ro.input.resampling                             u:object_r:exported_system_prop:s0
+viewroot.profile_rendering                      u:object_r:exported_system_prop:s0
