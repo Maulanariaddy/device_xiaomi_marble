@@ -38,6 +38,18 @@ PRODUCT_PACKAGES += \
     update_engine_sideload \
     update_verifier
 
+# AIDL NDK backend
+PRODUCT_PACKAGES += \
+    android.hardware.common-V2-ndk_platform.vendor \
+    android.hardware.gnss-V1-ndk_platform.vendor \
+    android.hardware.identity-V3-ndk_platform.vendor \
+    android.hardware.keymaster-V3-ndk_platform.vendor \
+    android.hardware.light-V1-ndk_platform.vendor \
+    android.hardware.memtrack-V1-ndk_platform.vendor \
+    android.hardware.security.keymint-V1-ndk_platform.vendor \
+    android.hardware.security.secureclock-V1-ndk_platform.vendor \
+    android.hardware.security.sharedsecret-V1-ndk_platform.vendor
+
 # AAPT
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
@@ -218,7 +230,13 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapper@2.0.vendor \
     vendor.qti.hardware.display.mapper@3.0.vendor \
     vendor.qti.hardware.display.mapper@4.0.vendor \
-    vendor.qti.hardware.display.mapperextensions@1.2.vendor
+    vendor.qti.hardware.display.mapperextensions@1.2.vendor \
+    vendor.qti.hardware.display.config-V1-ndk_platform.vendor \
+    vendor.qti.hardware.display.config-V2-ndk_platform.vendor \
+    vendor.qti.hardware.display.config-V3-ndk_platform.vendor \
+    vendor.qti.hardware.display.config-V4-ndk_platform.vendor \
+    vendor.qti.hardware.display.config-V5-ndk_platform.vendor \
+    vendor.qti.hardware.display.config-V6-ndk_platform.vendor
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
