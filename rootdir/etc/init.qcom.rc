@@ -881,3 +881,10 @@ service qrtr-lookup /vendor/bin/qrtr-lookup
     group system
     disabled
     oneshot
+
+service citsensor-hal-1-1 /vendor/bin/hw/vendor.xiaomi.hardware.citsensorservice@1.1-service
+    class late_start
+    user system
+    group system input
+    override
+    task_profiles ServiceCapacityLow
