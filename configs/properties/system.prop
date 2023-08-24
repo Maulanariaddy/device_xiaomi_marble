@@ -9,9 +9,6 @@ persist.vendor.bt.aac_frm_ctl.enabled=true
 persist.vendor.bt.a2dp.hal.implementation=true
 persist.vendor.bt.aac_vbr_frm_ctl.enabled=true
 
-# Blur
-ro.surface_flinger.supports_background_blur=0
-
 # Battery Saving
 ro.vendor.use_data_netmgrd=true 
 ro.vold.umsdirtyratio=20 
@@ -34,14 +31,17 @@ persist.debug.ftrace_events_disable=Yes
 
 # Disable Skia tracing by default
 debug.hwui.skia_atrace_enabled=false
-renderthread.skia.reduceopstasksplitting=true
-
-# Display
-hwui.disable_vsync=true
-hwui.render_dirty_regions=false
 
 # FEAS
 ro.feas.enable=true
+
+# FUSE passthrough
+persist.sys.fuse.passthrough.enable=true
+
+# Graphics
+debug.hwui.renderer=opengl
+renderthread.skia.reduceopstasksplitting=true 
+debug.renderengine.backend=skiaglthreaded
 
 # Improve global touch screen response
 debug.performance.tuning=1
@@ -114,15 +114,18 @@ persist.vendor.ssr.enable_ramdumps=1
 # System prop for NFC DT
 ro.nfc.port=I2C
 
-# Turn off vertical sync (V-Sync)
-debug.hwui.disable_vsync=true
-persist.sys.ui.hw=1
+# WiFi display
+persist.debug.wfd.enable=1
+persist.sys.wfd.virtual=0
 
 # WLAN
 ro.hardware.wlan.chip=qca6490
 ro.hardware.wlan.dbs=2
 ro.hardware.wlan.mimo=1
 ro.hardware.wlan.vendor=qcom
+
+# Zygote
+persist.device_config.runtime_native.usap_pool_enabled=true
 
 # Xiaomi
 ro.miui.notch=1
