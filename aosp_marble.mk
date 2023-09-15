@@ -9,19 +9,19 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Inherit some common Evolution X stuff.
-$(call inherit-product, vendor/afterlife/config/common_full_phone.mk)
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
 
 # Inherit from marble device.
 $(call inherit-product, device/xiaomi/marble/device.mk)
 
 # Build stuff.
-TARGET_BOOT_ANIMATION_RES := 1440
+TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_FACE_UNLOCK_OPTOUT := true
 TARGET_SUPPORTS_QUICK_TAP := true
 TARGET_SUPPORTS_ADAPTIVE_CHARGING := true
 TARGET_INCLUDE_LIVE_WALLPAPERS := true
-TARGET_SUPPORTS_GOOGLE_RECORDER := true
-AFTERLIFE_GAPPS := true
+HORIZON_GAPPS := true
+WITH_GAPPS := true
 USE_PIXEL_CHARGING =: true
 TARGET_FACE_UNLOCK_SUPPORTED := true
 
@@ -29,7 +29,7 @@ TARGET_FACE_UNLOCK_SUPPORTED := true
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := marble
 PRODUCT_MANUFACTURER := Xiaomi
-PRODUCT_NAME := afterlife_marble
+PRODUCT_NAME := aosp_marble
 
 # GMS
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
@@ -38,4 +38,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 TARGET_EXCLUDES_AUDIOFX := true
 
 # Maintainer
-AFTERLIFE_MAINTAINER := SMGxULS
+HORIZON_MAINTAINER := SMGReborn x Mauls
