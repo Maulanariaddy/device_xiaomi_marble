@@ -975,6 +975,10 @@ vendor/etc/mdss_dsi_m16t_36_0d_0b_dsc_vid_mi.xml
 vendor/lib64/libdisplayconfig.qti.so
 
 # Dolby Atmos
+system/lib/libdolbyottcontrol.so
+system/lib/libdovi_omx.so
+system/lib64/libdolbyottcontrol.so
+system/lib64/libdovi_omx.so
 vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service
 vendor/etc/dolby/dax-default.xml
 vendor/etc/init/vendor.dolby.hardware.dms@2.0-service.rc
