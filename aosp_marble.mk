@@ -30,5 +30,5 @@ PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 WITH_GAPPS := true
 
 # Maintainer Flags
-AOSP_MAINTAINER := SMGLaboratory x Maul's
+PIXELSTAR_MAINTAINER := SMGLaboratory x Maul's
 CUSTOM_BUILD_TYPE := UNOFFICIAL
