@@ -8,7 +8,7 @@ rm -rf vendor/xiaomi/marble && git clone https://github.com/maul-s/vendor_xiaomi
 
 # Kernel
 echo 'Cloning kernel tree'
-rm -rf device/xiaomi/marble-kernel && git clone https://github.com/SMGLaboratory/device_xiaomi_marble-kernel.git -b main device/xiaomi/marble-kernel
+rm -rf device/xiaomi/marble-kernel && git clone https://github.com/rama982/device_xiaomi_marble-kernel.git device/xiaomi/marble-kernel
 
 
 # Gapps
@@ -28,6 +28,9 @@ rm -rf hardware/xiaomi && git clone https://github.com/maul-s/hardware_xiaomi.gi
 echo 'Cloning BCR Tree'
 git clone https://github.com/maul-s/vendor_bcr.git vendor/bcr
 
+# Viper
+echo 'Cloning Viper4Audio'
+git clone https://github.com/maul-s/packages_apps_ViPER4AndroidFX.git packages/apps/ViPER4AndroidFX
 
 echo 'delete vendorsetup.sh from device tree once this is done'
 mv device/xiaomi/marble/vendorsetup.sh device/xiaomi/marble/vendorsetup.bak
