@@ -3,12 +3,12 @@ echo 'Starting to clone stuffs needed to build for marble'
 
 # Vendor
 echo 'Cloning vendor tree'
-rm -rf vendor/xiaomi/marble && git clone https://github.com/maul-s/vendor_xiaomi_marble.git vendor/xiaomi/marble
+rm -rf vendor/xiaomi/marble && git clone https://github.com/SMGLaboratory/vendor_xiaomi_marble.git vendor/xiaomi/marble
 
 
 # Kernel
 echo 'Cloning kernel tree'
-rm -rf device/xiaomi/marble-kernel && git clone https://github.com/rama982/device_xiaomi_marble-kernel.git device/xiaomi/marble-kernel
+rm -rf device/xiaomi/marble-kernel && git clone https://github.com/SMGLaboratory/device_xiaomi_marble-kernel.git -b main device/xiaomi/marble-kernel
 
 
 # Gapps
