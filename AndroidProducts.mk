@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/colt_marble.mk
+    $(LOCAL_DIR)/spark_marble.mk
 
 COMMON_LUNCH_CHOICES := \
-    colt_marble-eng \
-    colt_marble-userdebug \
-    colt_marble-user
+    spark_marble-eng \
+    spark_marble-userdebug \
+    spark_marble-user
