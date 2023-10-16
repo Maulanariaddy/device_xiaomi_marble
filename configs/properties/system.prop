@@ -12,6 +12,13 @@ persist.vendor.bt.aac_vbr_frm_ctl.enabled=true
 # Blur
 ro.surface_flinger.supports_background_blur=0
 
+# Battery Saving
+ro.vendor.use_data_netmgrd=true 
+ro.vold.umsdirtyratio=20 
+ro.ril.disable.power.collapse=0 
+power.saving.mode=1
+pm.sleep_mode=1
+
 # Charger
 ro.charger.enable_suspend=1
 
