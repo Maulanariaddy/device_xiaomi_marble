@@ -38,10 +38,20 @@ function configure_zram_parameters() {
 	# For >2GB Non-Go devices, size = 50% of RAM size. Limit the size to 4GB.
 	# And enable lz4 zram compression for all targets.
 
-	zRamSizeMB=2048
-        diskSizeUnit=M
+	let RamSizeGB="( $MemTotal / 1048576 ) + 1"
+	diskSizeUnit=M
+	if [ $RamSizeGB -le 2 ]; then
+		let zRamSizeMB="( $RamSizeGB * 1024 ) * 3 / 4"
+	else
+		let zRamSizeMB="( $RamSizeGB * 1024 ) / 2"
+	fi
 
-	echo zstd > /sys/block/zram0/comp_algorithm
+	# use MB avoid 32 bit overflow
+	if [ $zRamSizeMB -gt 4096 ]; then
+		let zRamSizeMB=4096
+	fi
+
+	echo lz4 > /sys/block/zram0/comp_algorithm
 
 	if [ -f /sys/block/zram0/disksize ]; then
 		if [ -f /sys/block/zram0/use_dedup ]; then
@@ -163,4 +173,3 @@ case "$chipfamily" in
 	echo "***WARNING***: Invalid chip family\n\t No postboot settings applied!!\n"
 	;;
 esac
-
