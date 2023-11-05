@@ -48,6 +48,23 @@ public class SummaryProvider extends ContentProvider {
         return bundle;
     }
 
+    private static final String KEY_FP_DOUBLE_TAP = "fp_double_tap";
+
+    @Override
+    public Bundle call(String method, String uri, Bundle extras) {
+        final Bundle bundle = new Bundle();
+        String summary;
+        switch (method) {
+            case KEY_FP_DOUBLE_TAP:
+                summary = getFpDoubleTapSummary();
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown method: " + method);
+        }
+        bundle.putString(META_DATA_PREFERENCE_SUMMARY, summary);
+        return bundle;
+    }
+
     @Override
     public boolean onCreate() {
         return true;
@@ -91,5 +108,17 @@ public class SummaryProvider extends ContentProvider {
         } else {
             return getContext().getString(R.string.dolby_on_with_profile, profileName);
         }
+
+    private String getFpDoubleTapSummary() {
+        if (!GestureUtils.isFpDoubleTapEnabled(getContext())) {
+            return getContext().getString(R.string.fp_double_tap_summary_off);
+        }
+        final int action = GestureUtils.getFpDoubleTapAction(getContext());
+        final List<String> actions = Arrays.asList(getContext().getResources().getStringArray(
+                R.array.fp_double_tap_action_values));
+        final int actionIndex = actions.indexOf(Integer.toString(action));
+        final String actionName = getContext().getResources().getStringArray(
+                R.array.fp_double_tap_action_entries)[actionIndex];
+        return getContext().getString(R.string.fp_double_tap_summary_on, actionName);
     }
 }
