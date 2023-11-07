@@ -274,6 +274,9 @@ PRODUCT_PACKAGES += \
     vendor.xiaomi.hardware.displayfeature@1.0.vendor \
     vendor.xiaomi.hw.touchfeature@1.0.vendor
 
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/display/advanced_sf_offsets.xml:$(TARGET_COPY_OUT_VENDOR)/etc/display/advanced_sf_offsets.xml
+
 # Health
 PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl-qti \
