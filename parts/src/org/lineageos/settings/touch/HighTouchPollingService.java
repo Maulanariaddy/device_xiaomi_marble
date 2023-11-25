@@ -112,5 +112,5 @@ public class HighTouchPollingService extends Service {
             Log.d(TAG, msg);
         }
     }
-    
+
 }
