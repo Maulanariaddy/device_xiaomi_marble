@@ -73,6 +73,9 @@ function blob_fixup() {
     vendor/etc/media_codecs_dolby_audio.xml)
         sed -i "/software-codec/d" "${2}"
         ;;
+    vendor/lib64/libdlbdsservice.so | vendor/lib64/soundfx/libhwdap.so)
+        "${PATCHELF}" --replace-needed "libstagefright_foundation.so" "libstagefright_foundation-v33.so" "${2}"
+        ;;
     esac
 }
 
