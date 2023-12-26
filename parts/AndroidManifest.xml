@@ -212,5 +212,23 @@
             android:permission="TouchOrientationService">
         </service>
 
+        <service
+            android:name=".refreshrate.RefreshService"
+            android:exported="true"
+            android:permission="RefreshService">
+        </service>
+
+        <service
+            android:name=".doze.PocketService"
+            android:exported="true"
+            android:permission="PocketService">
+        </service>
+
+        <service
+            android:name=".doze.AodBrightnessService"
+            android:exported="true"
+            android:permission="AodBrightnessService">
+        </service>
+
     </application>
 </manifest>

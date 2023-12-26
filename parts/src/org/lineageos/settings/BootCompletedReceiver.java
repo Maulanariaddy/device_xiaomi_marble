@@ -32,7 +32,6 @@ import androidx.preference.PreferenceManager;
 
 import org.lineageos.settings.camera.NfcCameraService;
 import org.lineageos.settings.display.ColorService;
-import org.lineageos.settings.dolby.DolbyUtils;
 import org.lineageos.settings.doze.AodBrightnessService;
 import org.lineageos.settings.doze.DozeUtils;
 import org.lineageos.settings.doze.PocketService;
@@ -75,7 +74,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         // AOD
         AodBrightnessService.startService(context);
 
-        // Refresh Rate
+        // Per app refresh rate
         RefreshUtils.startService(context);
 
         // High Touch Polling
