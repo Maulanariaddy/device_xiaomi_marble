@@ -11,7 +11,4 @@
 
     <!-- Whether device supports increased touch sensitvity -->
     <bool name="config_supportTouchPollingMode">true</bool>
-
-    <!-- Whether device supports increased touch sensitvity -->
-    <bool name="config_supportTouchPollingMode">true</bool>
 </resources>
