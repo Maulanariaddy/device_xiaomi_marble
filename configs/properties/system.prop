@@ -128,10 +128,6 @@ ro.nfc.port=I2C
 debug.hwui.disable_vsync=true
 persist.sys.ui.hw=1
 
-# WiFi display
-persist.debug.wfd.enable=1
-persist.sys.wfd.virtual=0
-
 # WLAN
 ro.hardware.wlan.chip=qca6490
 ro.hardware.wlan.dbs=2
