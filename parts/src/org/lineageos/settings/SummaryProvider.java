@@ -27,11 +27,16 @@ import android.os.Bundle;
 
 import org.lineageos.settings.R;
 import org.lineageos.settings.dolby.DolbyUtils;
+import org.lineageos.settings.gestures.GestureUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 /** Provide preference summary for injected items. */
 public class SummaryProvider extends ContentProvider {
 
     private static final String KEY_DOLBY = "dolby";
+    private static final String KEY_FP_DOUBLE_TAP = "fp_double_tap";
 
     @Override
     public Bundle call(String method, String uri, Bundle extras) {
@@ -41,20 +46,6 @@ public class SummaryProvider extends ContentProvider {
             case KEY_DOLBY:
                 summary = getDolbySummary();
                 break;
-            default:
-                throw new IllegalArgumentException("Unknown method: " + method);
-        }
-        bundle.putString(META_DATA_PREFERENCE_SUMMARY, summary);
-        return bundle;
-    }
-
-    private static final String KEY_FP_DOUBLE_TAP = "fp_double_tap";
-
-    @Override
-    public Bundle call(String method, String uri, Bundle extras) {
-        final Bundle bundle = new Bundle();
-        String summary;
-        switch (method) {
             case KEY_FP_DOUBLE_TAP:
                 summary = getFpDoubleTapSummary();
                 break;
@@ -108,6 +99,7 @@ public class SummaryProvider extends ContentProvider {
         } else {
             return getContext().getString(R.string.dolby_on_with_profile, profileName);
         }
+    }
 
     private String getFpDoubleTapSummary() {
         if (!GestureUtils.isFpDoubleTapEnabled(getContext())) {
@@ -121,4 +113,5 @@ public class SummaryProvider extends ContentProvider {
                 R.array.fp_double_tap_action_entries)[actionIndex];
         return getContext().getString(R.string.fp_double_tap_summary_on, actionName);
     }
+
 }

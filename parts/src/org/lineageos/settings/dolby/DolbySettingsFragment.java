@@ -24,17 +24,17 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Switch;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Toast;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 import androidx.preference.PreferenceFragment;
-import androidx.preference.SwitchPreference;
+import androidx.preference.SwitchPreferenceCompat;
 
 import com.android.settingslib.widget.MainSwitchPreference;
-import com.android.settingslib.widget.OnMainSwitchChangeListener;
 
 import org.lineageos.settings.R;
 
@@ -42,7 +42,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DolbySettingsFragment extends PreferenceFragment implements
-        OnPreferenceChangeListener, OnMainSwitchChangeListener {
+        OnPreferenceChangeListener, OnCheckedChangeListener {
 
     private static final String TAG = "DolbySettingsFragment";
 
@@ -62,7 +62,7 @@ public class DolbySettingsFragment extends PreferenceFragment implements
 
     private MainSwitchPreference mSwitchBar;
     private ListPreference mProfilePref, mPresetPref, mStereoPref, mDialoguePref;
-    private SwitchPreference mBassPref, mVirtualizerPref, mVolumePref;
+    private SwitchPreferenceCompat mBassPref, mVirtualizerPref, mVolumePref;
     private Preference mResetPref;
     private CharSequence[] mPresets, mDeValues, mSwValues;
 
@@ -113,7 +113,7 @@ public class DolbySettingsFragment extends PreferenceFragment implements
         mPresetPref.setOnPreferenceChangeListener(this);
         mPresets = mPresetPref.getEntryValues();
 
-        mVirtualizerPref = (SwitchPreference) findPreference(PREF_VIRTUALIZER);
+        mVirtualizerPref = (SwitchPreferenceCompat) findPreference(PREF_VIRTUALIZER);
         mVirtualizerPref.setOnPreferenceChangeListener(this);
 
         mStereoPref = (ListPreference) findPreference(PREF_STEREO);
@@ -124,10 +124,10 @@ public class DolbySettingsFragment extends PreferenceFragment implements
         mDialoguePref.setOnPreferenceChangeListener(this);
         mDeValues = mDialoguePref.getEntryValues();
 
-        mBassPref = (SwitchPreference) findPreference(PREF_BASS);
+        mBassPref = (SwitchPreferenceCompat) findPreference(PREF_BASS);
         mBassPref.setOnPreferenceChangeListener(this);
 
-        mVolumePref = (SwitchPreference) findPreference(PREF_VOLUME);
+        mVolumePref = (SwitchPreferenceCompat) findPreference(PREF_VOLUME);
         mVolumePref.setOnPreferenceChangeListener(this);
 
         mResetPref = (Preference) findPreference(PREF_RESET);
@@ -185,7 +185,7 @@ public class DolbySettingsFragment extends PreferenceFragment implements
     }
 
     @Override
-    public void onSwitchChanged(Switch switchView, boolean isChecked) {
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         mDsOn = isChecked;
         mDolbyUtils.setDsOn(isChecked);
         mProfilePref.setEnabled(isChecked);
