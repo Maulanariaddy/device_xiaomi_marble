@@ -359,6 +359,7 @@ persist.sys.lmkd.extend_reclaim.enable=true
 # Media
 debug.c2.use_dmabufheaps=1
 debug.config.media.video.dolby_vision_suports=true
+media.stagefright.thumbnail.prefer_hw_codecs=true
 debug.mdpcomp.logs=0
 debug.stagefright.omx_default_rank=0
 debug.stagefright.c2inputsurface=-1
