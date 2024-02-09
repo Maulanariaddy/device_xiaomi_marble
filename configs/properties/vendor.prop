@@ -106,6 +106,9 @@ ro.vendor.audio.misound.bluetooth.enable=true
 ro.vendor.audio.support.sound.id=true
 ro.vendor.audio.ce.compensation.need=true
 ro.vendor.audio.ce.compensation.value=5
+persist.vendor.radio.dynamic_sar=1
+ro.vendor.radio.build_profile=u-stable
+ro.hardware.keystore_desede=true 
 
 # Audio feature
 vendor.audio.feature.a2dp_offload.enable=true
@@ -414,7 +417,7 @@ persist.vendor.radio.redir_party_num=0
 # RCS
 persist.vendor.rcs.singlereg.feature=1
 
-# SOC
+# SoC
 ro.soc.manufacturer=QTI
 
 # SSR

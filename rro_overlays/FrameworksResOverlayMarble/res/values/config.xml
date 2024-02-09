@@ -49,7 +49,6 @@
     <!-- Slow brightness animation ramp rate in brightness units per second -->
     <integer translatable="false" name="config_brightness_ramp_rate_slow">246</integer>
 
-
     <!-- The maximum range of gamma adjustment possible using the screen
          auto-brightness adjustment setting. -->
     <fraction name="config_autoBrightnessAdjustmentMaxGamma">150%</fraction>
@@ -757,6 +756,9 @@
     <!-- Should the pinner service pin the Home application? -->
     <bool name="config_pinnerHomeApp">false</bool>
 
-     <!--Useful if you want to improve signal reception -->
+    <!--Useful if you want to improve signal reception -->
     <bool name="config_ignoreRssnrSignalLevel">true</bool>
+
+    <!-- The default vibration strength, must be between 1 and 255 inclusive. -->
+    <integer name="config_defaultVibrationAmplitude">128</integer>
 </resources>
