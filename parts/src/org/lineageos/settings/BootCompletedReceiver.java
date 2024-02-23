@@ -70,7 +70,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
         // Data is now accessible (user has just unlocked).
         DolbyUtils.getInstance(context).onBootCompleted();
         DozeUtils.checkDozeService(context);
-        RefreshUtils.initialize(context);
+        // RefreshUtils.initialize(context);
         ThermalUtils.startService(context);
         HighTouchPollingService.startService(context);
         TouchOrientationService.startService(context);

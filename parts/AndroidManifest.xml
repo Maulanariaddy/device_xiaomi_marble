@@ -141,6 +141,13 @@
             android:authorities="org.lineageos.settings.device.summary">
         </provider>
 
+        <!--
+        <service
+            android:name=".refreshrate.RefreshService"
+            android:exported="true"
+            android:permission="ThermalService">
+        </service>
+
         <activity
             android:name=".refreshrate.RefreshActivity"
             android:label="@string/refresh_title"
@@ -154,7 +161,19 @@
             <meta-data
                 android:name="com.android.settings.summary"
                 android:resource="@string/refresh_summary" />
-        </activity>
+        </activity> 
+        
+        <service
+            android:name=".refreshrate.RefreshTileService"
+            android:icon="@drawable/ic_qs_refresh_rate"
+            android:label="@string/refresh_title"
+            android:exported="true"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+        -->
 
         <activity
             android:name=".thermal.ThermalSettingsActivity"
@@ -243,12 +262,6 @@
         <service
             android:name=".touch.TouchOrientationService"
             android:permission="TouchOrientationService">
-        </service>
-
-        <service
-            android:name=".refreshrate.RefreshService"
-            android:exported="true"
-            android:permission="ThermalService">
         </service>
 
         <service
