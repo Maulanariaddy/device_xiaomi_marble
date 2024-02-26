@@ -52,9 +52,6 @@ hwui.render_dirty_regions=false
 # FEAS
 ro.feas.enable=true
 
-# FUSE passthrough
-persist.sys.fuse.passthrough.enable=true
-
 # Improve global touch screen response
 debug.performance.tuning=1
 video.accelerate.hw=1
