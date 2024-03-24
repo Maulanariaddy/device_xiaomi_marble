@@ -27,6 +27,10 @@ ro.feas.enable=true
 # FUSE passthrough
 persist.sys.fuse.passthrough.enable=true
 
+# Fling
+ro.min.fling_velocity=160
+ro.max.fling_velocity=20000
+
 # Hint Manager
 debug.hwui.use_hint_manager=true
 debug.hwui.target_cpu_time_percent=30
