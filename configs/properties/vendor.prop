@@ -73,7 +73,6 @@ ro.vendor.audio.us.proximity=false
 vendor.audio.ultrasound.stoplatency=60
 vendor.audio.ultrasound.usync=1000
 ro.audio.usb.period_us=20375
-af.resampler.quality=7
 ro.audio.resampler.psd.stopband=132
 ro.audio.resampler.psd.halflength=960
 ro.audio.resampler.psd.cutoff_percent=98
