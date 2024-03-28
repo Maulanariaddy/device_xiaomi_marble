@@ -2948,13 +2948,6 @@ vendor/etc/seccomp_policy/sxr@2.0.policy
 vendor/lib64/libsxrcryptoimpl.so
 vendor/lib64/libsxrservice.so
 
-# Thermal
-vendor/bin/hw/android.hardware.thermal@2.0-service.qti-v2
-vendor/etc/init/android.hardware.thermal@2.0-service.qti-v2.rc
-vendor/etc/vintf/manifest/android.hardware.thermal@2.0-service.qti.xml
-vendor/lib/libthermalclient.so
-vendor/lib64/libthermalclient.so
-
 # Thermal configs
 vendor/etc/thermal-4k.conf
 vendor/etc/thermal-camera.conf
@@ -2984,16 +2977,6 @@ vendor/etc/thermal-video.conf
 vendor/etc/thermal-videochat.conf
 vendor/etc/thermal-yuanshen.conf
 vendor/etc/thermald-devices.conf
-
-# Thermal engine
-vendor/bin/mi_thermald
-vendor/bin/thermal-engine-v2
-vendor/etc/init/hw/init.mi_thermald.rc
-vendor/etc/init/init_thermal-engine-v2.rc
-
-# Thermal Service Client
-system_ext/lib/libthermalclient.qti.so
-system_ext/lib64/libthermalclient.qti.so
 
 # Time services
 vendor/app/TimeService/TimeService.apk
