@@ -27,3 +27,6 @@ PRODUCT_NAME := superior_marble
 
 # GMS
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+
+# GAPPS
+WITH_GAPPS := true
