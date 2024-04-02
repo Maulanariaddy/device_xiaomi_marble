@@ -8,8 +8,8 @@
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
-# Inherit some common Firedroid stuff.
-$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+# Inherit some common PixelExperience stuff.
+$(call inherit-product, vendor/bootleg/config/common_full_phone.mk)
 
 # Inherit from marble device.
 $(call inherit-product, device/xiaomi/marble/device.mk)
@@ -26,7 +26,7 @@ TARGET_INCLUDE_LIVE_WALLPAPERS := true
 PRODUCT_BRAND := Xiaomi
 PRODUCT_DEVICE := marble
 PRODUCT_MANUFACTURER := Xiaomi
-PRODUCT_NAME := aosp_marble
+PRODUCT_NAME := bootleg_marble
 
 # GMS
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
@@ -36,7 +36,3 @@ TARGET_EXCLUDES_AUDIOFX := true
 
 # GAPPS
 WITH_GAPPS := true
-
-# FireDroid Maintainer Flags
-FIREDROID_MAINTAINER := Maul's
-CUSTOM_BUILD_TYPE := OFFICIAL
