@@ -124,8 +124,8 @@ BOARD_KERNEL_CMDLINE := \
     video=vfb:640x400,bpp=32,memsize=3072000 \
     disable_dma32=on \
     kpti=off \
-    swinfo.fingerprint=$(AOSP_VERSION) \
-    mtdoops.fingerprint=$(AOSP_VERSION) \
+    swinfo.fingerprint=$(BOOTLEG_VERSION) \
+    mtdoops.fingerprint=$(BOOTLEG_VERSION) \
     allow_file_spec_access \
     irqaffinity=0-3 \
     pelt=8

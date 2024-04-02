@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/aosp_marble.mk
+    $(LOCAL_DIR)/bootleg_marble.mk
 
 COMMON_LUNCH_CHOICES := \
-    aosp_marble-eng \
-    aosp_marble-userdebug \
-    aosp_marble-user
+    bootleg_marble-eng \
+    bootleg_marble-userdebug \
+    bootleg_marble-user
