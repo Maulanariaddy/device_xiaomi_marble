@@ -7,14 +7,9 @@
 DEVICE_PATH := device/xiaomi/marble
 KERNEL_PATH := $(DEVICE_PATH)-kernel
 
-# Architecture
-TARGET_ARCH := arm64
-TARGET_ARCH_VARIANT := armv9-a
-TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_VARIANT := cortex-a510
-
 # A/B
 AB_OTA_UPDATER := true
+
 AB_OTA_PARTITIONS += \
     boot \
     dtbo \
@@ -33,7 +28,7 @@ AB_OTA_PARTITIONS += \
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv9-a
 TARGET_CPU_ABI := arm64-v8a
-TARGET_CPU_VARIANT := cortex-a510
+TARGET_CPU_VARIANT := cortex-a76
 
 # Audio
 AUDIO_FEATURE_ENABLED_DLKM := true
@@ -111,37 +106,35 @@ TARGET_RECOVERY_DEVICE_MODULES ?= init_xiaomi_marble
 
 # Kernel
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-BOARD_RAMDISK_USE_LZ4 := true
-BOARD_USES_GENERIC_KERNEL_IMAGE := true
-
-BOARD_BOOT_HEADER_VERSION := 4
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
-
 BOARD_KERNEL_BASE := 0x00000000
 
 BOARD_KERNEL_CMDLINE := \
     video=vfb:640x400,bpp=32,memsize=3072000 \
     disable_dma32=on \
     kpti=off \
-    swinfo.fingerprint=$(AOSP_VERSION) \
-    mtdoops.fingerprint=$(AOSP_VERSION) \
+    swinfo.fingerprint=$(SUPERIOR_VERSION) \
+    mtdoops.fingerprint=$(SUPERIOR_VERSION) \
     allow_file_spec_access \
     irqaffinity=0-3 \
     pelt=8
 
 BOARD_BOOTCONFIG := \
     androidboot.hardware=qcom \
-    androidboot.init_fatal_reboot_target=recovery \
     androidboot.memcg=1 \
-    androidboot.usbcontroller=a600000.dwc3
+    androidboot.usbcontroller=a600000.dwc3 \
+    androidboot.init_fatal_reboot_target=recovery
+
+BOARD_BOOT_HEADER_VERSION := 4
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 BOARD_KERNEL_IMAGE_NAME := Image
 
+BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+BOARD_RAMDISK_USE_LZ4 := true
+BOARD_USES_GENERIC_KERNEL_IMAGE := true
+
 # Kill lineage kernel build task while preserving kernel
 TARGET_NO_KERNEL_OVERRIDE := true
-TARGET_FORCE_PREBUILT_KERNEL := true
-TARGET_KERNEL_CONFIG := marble_defconfig
 
 # Workaround to make lineage's soong generator work
 TARGET_KERNEL_SOURCE := $(KERNEL_PATH)/kernel-headers
@@ -169,6 +162,9 @@ BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(KERNEL_PATH)/vendor_dl
 BOARD_VENDOR_KERNEL_MODULES := $(addprefix $(KERNEL_PATH)/vendor_dlkm/, $(BOARD_VENDOR_KERNEL_MODULES_LOAD))
 BOARD_VENDOR_KERNEL_MODULES_BLOCKLIST_FILE :=  $(KERNEL_PATH)/vendor_dlkm/modules.blocklist
 
+# Metadata
+BOARD_USES_METADATA_PARTITION := true
+
 # Fix prebuilt build
 $(shell mkdir -p $(OUT_DIR)/target/product/marble/obj/KERNEL_OBJ/usr)
 
@@ -177,24 +173,32 @@ TARGET_OTA_ASSERT_DEVICE := marble|marblein
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
-BOARD_BOOTIMAGE_PARTITION_SIZE := 201326592
-BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
+
 BOARD_DTBOIMG_PARTITION_SIZE := 25165824
+BOARD_BOOTIMAGE_PARTITION_SIZE := 201326592
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 104857600
-BOARD_USES_METADATA_PARTITION := true
+BOARD_VENDOR_BOOTIMAGE_PARTITION_SIZE := 100663296
 
 BOARD_SUPER_PARTITION_SIZE := 9663676416
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm product system system_ext vendor vendor_dlkm
-BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9659482112 # (BOARD_SUPER_PARTITION_SIZE - 4MB overhead)
-
-$(foreach p, $(call to-upper, $(BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST)), \
-    $(eval BOARD_$(p)IMAGE_FILE_SYSTEM_TYPE := ext4) \
-    $(eval BOARD_$(p)IMAGE_PARTITION_RESERVED_SIZE := 104857600) \
-    $(eval TARGET_COPY_OUT_$(p) := $(call to-lower, $(p))))
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9659482112
 
 BOARD_PARTITION_LIST := $(call to-upper, $(BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST))
 $(foreach p, $(BOARD_PARTITION_LIST), $(eval BOARD_$(p)IMAGE_FILE_SYSTEM_TYPE := ext4))
+
+ifneq ($(WITH_GAPPS),true)
+BOARD_PRODUCTIMAGE_EXTFS_INODE_COUNT ?= -1
+ifeq ($(PRODUCT_VIRTUAL_AB_OTA),true)
+BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE ?= 1188036608
+else
+BOARD_PRODUCTIMAGE_PARTITION_RESERVED_SIZE ?= 1957691392
+endif
+BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT ?= -1
+BOARD_SYSTEMIMAGE_PARTITION_RESERVED_SIZE ?= 1258291200
+BOARD_SYSTEM_EXTIMAGE_EXTFS_INODE_COUNT ?= -1
+BOARD_SYSTEM_EXTIMAGE_PARTITION_RESERVED_SIZE ?= 629145600
+endif
 
 TARGET_COPY_OUT_ODM := odm
 TARGET_COPY_OUT_PRODUCT := product
@@ -221,9 +225,8 @@ TARGET_VENDOR_PROP += $(DEVICE_PATH)/configs/properties/vendor.prop
 # Recovery
 BOARD_EXCLUDE_KERNEL_FROM_RECOVERY_IMAGE := true
 BOARD_USES_RECOVERY_AS_BOOT := false
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
-TARGET_RECOVERY_UI_MARGIN_HEIGHT := 104
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
 
@@ -239,6 +242,9 @@ include device/qcom/sepolicy_vndr/SEPolicy.mk
 SYSTEM_EXT_PRIVATE_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/private
 SYSTEM_EXT_PUBLIC_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/public
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+
+# SurfaceFlinger
+TARGET_USE_AOSP_SURFACEFLINGER := true
 
 # VINTF
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/configs/vintf/compatibility_matrix.xml

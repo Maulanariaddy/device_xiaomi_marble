@@ -4,18 +4,29 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Inherit virtual_ab_ota_product.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
+
+# Enable project quotas and casefolding for emulated storage without sdcardfs.
+$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
+# Setup dalvik vm configs
+$(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
+
 # Call the proprietary setup.
 $(call inherit-product, vendor/xiaomi/marble/marble-vendor.mk)
-
-# MiuiCamera
-$(call inherit-product-if-exists, vendor/xiaomi/camera/miuicamera.mk)
 
 # Call the BCR setup
 $(call inherit-product-if-exists, vendor/bcr/bcr.mk)
 
-# A/B
-$(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota/launch_with_vendor_ramdisk.mk)
+# AAPT
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
+# A/B
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
@@ -29,14 +40,8 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_OPTIONAL_vendor=true
 
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.2-impl-qti \
-    android.hardware.boot@1.2-impl-qti.recovery \
-    android.hardware.boot@1.2-service \
     checkpoint_gc \
-    otapreopt_script \
-    update_engine \
-    update_engine_sideload \
-    update_verifier
+    otapreopt_script
 
 # AIDL NDK backend
 PRODUCT_PACKAGES += \
@@ -50,10 +55,6 @@ PRODUCT_PACKAGES += \
     android.hardware.security.secureclock-V1-ndk_platform.vendor \
     android.hardware.security.sharedsecret-V1-ndk_platform.vendor
 
-# AAPT
-PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xxhdpi
-
 # ANT+
 PRODUCT_PACKAGES += \
     com.dsi.ant@1.0.vendor
@@ -63,7 +64,10 @@ PRODUCT_PACKAGES += \
     android.hardware.atrace@1.0-service
 
 # Audio
-$(call soong_config_set, android_hardware_audio, run_64bit, true)
+SOONG_CONFIG_NAMESPACES += android_hardware_audio
+SOONG_CONFIG_android_hardware_audio += \
+    run_64bit
+SOONG_CONFIG_android_hardware_audio_run_64bit := true
 
 PRODUCT_PACKAGES += \
     android.hardware.audio@7.1-impl \
@@ -71,7 +75,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.service \
     android.hardware.soundtrigger@2.3-impl \
     audio.primary.default \
-    audio.primary.msmnile
 
 PRODUCT_PACKAGES += \
     audio.bluetooth.default \
@@ -132,7 +135,6 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0.vendor \
     android.hardware.bluetooth.audio-impl \
     libldacBT_abr \
-    libldacBT_bco \
     libldacBT_enc \
     vendor.qti.hardware.bluetooth_audio@2.1.vendor \
     vendor.qti.hardware.btconfigstore@1.0.vendor \
@@ -143,15 +145,23 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
 
 # Boot animation
-TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_BOOT_ANIMATION_RES := 1440
 
 # Boot control
+PRODUCT_PACKAGES += \
+    android.hardware.boot@1.2-impl-qti \
+    android.hardware.boot@1.2-impl-qti.recovery \
+    android.hardware.boot@1.2-service
+
 PRODUCT_PACKAGES_DEBUG += \
     bootctl
 
-# Camera
+# Miui Camera
+TARGET_CAMERA_USES_NEWER_HIDL_OVERRIDE_FORMAT := true
+TARGET_INCLUDES_MIUI_CAMERA := true
 $(call inherit-product-if-exists, vendor/xiaomi/camera/miuicamera.mk)
 
+# Camera
 PRODUCT_PACKAGES += \
     android.hardware.camera.provider@2.7.vendor \
     camera.device@1.0-impl \
@@ -166,6 +176,10 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.full.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.full.xml \
     frameworks/native/data/etc/android.hardware.camera.raw.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.raw.xml
 
+# Capabilityconfigstore
+PRODUCT_PACKAGES += \
+    vendor.qti.hardware.capabilityconfigstore@1.0.vendor
+
 # Camera Legacy HIDL deps
 PRODUCT_PACKAGES += \
     android.hidl.manager@1.0 \
@@ -174,27 +188,20 @@ PRODUCT_PACKAGES += \
     android.hidl.memory.block@1.0.vendor \
     android.hidl.memory@1.0-impl
 
-# Capabilityconfigstore
-PRODUCT_PACKAGES += \
-    vendor.qti.hardware.capabilityconfigstore@1.0.vendor
-
-# Characteristics
-PRODUCT_CHARACTERISTICS := nosdcard
-
 # Charger
 PRODUCT_PACKAGES += \
     libsuspend \
     charger_res_images
 
+# Configs
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/perf,$(TARGET_COPY_OUT_VENDOR)/etc/perf) \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/lm,$(TARGET_COPY_OUT_VENDOR)/etc/lm) \
+    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/pwr,$(TARGET_COPY_OUT_VENDOR)/etc/pwr)
+
 # Dalvik
-$(call inherit-product, frameworks/native/build/phone-xhdpi-12288-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
-# Device Settings
-PRODUCT_PACKAGES += \
-    KeyHandler \
-    XiaomiParts
-
-# Display / Graphics
+# Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@3.0-impl \
     android.hardware.graphics.allocator@4.0-impl \
@@ -230,13 +237,7 @@ PRODUCT_PACKAGES += \
     vendor.qti.hardware.display.mapper@2.0.vendor \
     vendor.qti.hardware.display.mapper@3.0.vendor \
     vendor.qti.hardware.display.mapper@4.0.vendor \
-    vendor.qti.hardware.display.mapperextensions@1.2.vendor \
-    vendor.qti.hardware.display.config-V1-ndk_platform.vendor \
-    vendor.qti.hardware.display.config-V2-ndk_platform.vendor \
-    vendor.qti.hardware.display.config-V3-ndk_platform.vendor \
-    vendor.qti.hardware.display.config-V4-ndk_platform.vendor \
-    vendor.qti.hardware.display.config-V5-ndk_platform.vendor \
-    vendor.qti.hardware.display.config-V6-ndk_platform.vendor
+    vendor.qti.hardware.display.mapperextensions@1.2.vendor
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.opengles.aep.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.opengles.aep.xml \
@@ -277,6 +278,10 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.1-impl-mock \
     fastbootd
 
+# Gatekeeper
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0.vendor
+
 # GPS
 PRODUCT_PACKAGES += \
     android.hardware.gnss-V1-ndk.vendor \
@@ -303,6 +308,7 @@ PRODUCT_PACKAGES += \
     android.hidl.manager@1.0.vendor \
     android.hidl.memory@1.0-impl \
     android.hidl.memory.block@1.0 \
+    android.hidl.memory.block@1.0.vendor \
     android.hidl.allocator@1.0.vendor \
     libhidltransport.vendor \
     libhwbinder.vendor
@@ -319,7 +325,11 @@ PRODUCT_PACKAGES += \
 # Input
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/idc/uinput-fpc.idc:$(TARGET_COPY_OUT_SYSTEM)/usr/idc/uinput-fpc.idc \
-    $(LOCAL_PATH)/configs/idc/uinput-goodix.idc:$(TARGET_COPY_OUT_SYSTEM)/usr/idc/uinput-goodix.idc
+    $(LOCAL_PATH)/configs/idc/uinput-goodix.idc:$(TARGET_COPY_OUT_SYSTEM)/usr/idc/uinput-goodix.idc \
+    $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/configs/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-fpc.kl \
+    $(LOCAL_PATH)/configs/keylayout/uinput-goodix.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-goodix.kl \
+    $(LOCAL_PATH)/configs/keylayout/Button_Jack.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/ukee-mtp-snd-card_Button_Jack.kl
 
 # IPACM
 PRODUCT_PACKAGES += \
@@ -343,7 +353,6 @@ PRODUCT_PACKAGES += \
 
 # Keymaster
 PRODUCT_PACKAGES += \
-    android.hardware.gatekeeper@1.0.vendor \
     android.hardware.keymaster@4.1.vendor \
     android.hardware.security.rkp-V1-ndk.vendor \
     android.hardware.security.sharedsecret-V1-ndk_platform.vendor \
@@ -362,13 +371,6 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml
-
-# Keylayout
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/keylayout/gpio-keys.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/gpio-keys.kl \
-    $(LOCAL_PATH)/configs/keylayout/uinput-fpc.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-fpc.kl \
-    $(LOCAL_PATH)/configs/keylayout/uinput-goodix.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/uinput-goodix.kl \
-    $(LOCAL_PATH)/configs/keylayout/Button_Jack.kl:$(TARGET_COPY_OUT_VENDOR)/usr/keylayout/ukee-mtp-snd-card_Button_Jack.kl
 
 # Logging
 SPAMMY_LOG_TAGS := \
@@ -484,9 +486,6 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/xiaomi
 
 # Overlays
-DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-lineage
-
 PRODUCT_PACKAGES += \
     AospWifiResOverlayMarble \
     AvoidAppsInCutoutOverlay \
@@ -520,9 +519,6 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # Perf
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/msm_irqbalance.conf:$(TARGET_COPY_OUT_VENDOR)/etc/msm_irqbalance.conf \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/perf,$(TARGET_COPY_OUT_VENDOR)/etc/perf) \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/lm,$(TARGET_COPY_OUT_VENDOR)/etc/lm) \
-    $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/pwr,$(TARGET_COPY_OUT_VENDOR)/etc/pwr)
 
 PRODUCT_PACKAGES += \
     libpsi.vendor \
@@ -592,10 +588,8 @@ PRODUCT_PACKAGES += \
     ueventd-odm.rc
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/bin/init.kernel.post_boot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.kernel.post_boot.sh
-
-# Scudo
-PRODUCT_USE_SCUDO := true
+    $(LOCAL_PATH)/rootdir/bin/init.kernel.post_boot.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.kernel.post_boot.sh \
+    $(LOCAL_PATH)/rootdir/bin/init.marble.perf.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.marble.perf.sh
 
 # Secure element
 PRODUCT_PACKAGES += \
@@ -716,6 +710,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.usb.host.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.usb.host.xml
 
 # Update engine
+PRODUCT_PACKAGES += \
+    update_engine \
+    update_engine_sideload \
+    update_verifier
+
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
 
@@ -723,6 +722,7 @@ PRODUCT_PACKAGES_DEBUG += \
 PRODUCT_PACKAGES += \
     libutils-shim
 
+# VNDK
 PRODUCT_COPY_FILES += \
     prebuilts/vndk/v33/arm/arch-arm-armv7-a-neon/shared/vndk-core/libstagefright_foundation.so:$(TARGET_COPY_OUT_VENDOR)/lib/libstagefright_foundation-v33.so \
     prebuilts/vndk/v33/arm64/arch-arm64-armv8-a/shared/vndk-core/libstagefright_foundation.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libstagefright_foundation-v33.so

@@ -137,13 +137,13 @@ function blob_fixup() {
         "${PATCHELF}" --replace-needed "android.hardware.security.keymint-V1-ndk_platform.so" "android.hardware.security.keymint-V1-ndk.so" "${2}"
         "${PATCHELF}" --replace-needed "android.hardware.security.secureclock-V1-ndk_platform.so" "android.hardware.security.secureclock-V1-ndk.so" "${2}"
         "${PATCHELF}" --replace-needed "android.hardware.security.sharedsecret-V1-ndk_platform.so" "android.hardware.security.sharedsecret-V1-ndk.so" "${2}"
-        "${PATCHELF}" --add-needed "android.hardware.security.rkp-V3-ndk.so" "${2}"
+        "${PATCHELF}" --add-needed "android.hardware.security.rkp-V1-ndk.so" "${2}"
         ;;
     vendor/lib64/libqtikeymint.so)
         "${PATCHELF}" --replace-needed "android.hardware.security.keymint-V1-ndk_platform.so" "android.hardware.security.keymint-V1-ndk.so" "${2}"
         "${PATCHELF}" --replace-needed "android.hardware.security.secureclock-V1-ndk_platform.so" "android.hardware.security.secureclock-V1-ndk.so" "${2}"
         "${PATCHELF}" --replace-needed "android.hardware.security.sharedsecret-V1-ndk_platform.so" "android.hardware.security.sharedsecret-V1-ndk.so" "${2}"
-        "${PATCHELF}" --add-needed "android.hardware.security.rkp-V3-ndk.so" "${2}"
+        "${PATCHELF}" --add-needed "android.hardware.security.rkp-V1-ndk.so" "${2}"
         ;;
     vendor/lib64/libcamximageformatutils.so)
         "${PATCHELF}" --replace-needed "vendor.qti.hardware.display.config-V2-ndk_platform.so" "vendor.qti.hardware.display.config-V2-ndk.so" "${2}"
@@ -182,22 +182,6 @@ function blob_fixup() {
     vendor/lib/libcodec2_vndk.stock.so)
         "${PATCHELF}" --set-soname "libcodec2_vndk.stock.so" "${2}"
         ;;
-    vendor/bin/hw/android.hardware.security.keymint-service-qti | vendor/lib64/libqtikeymint.so)
-            "${PATCHELF}" --add-needed "android.hardware.security.rkp-V1-ndk_platform.so" "${2}"
-        ;;
-    vendor/lib64/libcom.xiaomi.mawutils.so | vendor/lib64/libmis_plugin_morpho.so | vendor/lib64/camera/components/com.qti.node.dewarp.so | vendor/lib64/camera/components/com.mi.node.skinbeautifier.so | vendor/lib64/camera/components/com.mi.node.mawsaliency.so | vendor/lib64/camera/components/com.mi.node.aiasd.so | vendor/lib64/camera/components/com.xiaomi.node.misv3.so | vendor/lib64/camera/components/com.xiaomi.node.gme.so | vendor/lib64/camera/components/com.mi.node.eisv2.so | vendor/lib64/camera/components/com.mi.node.test_rearvideo.so | vendor/lib64/camera/components/com.mi.node.facealign.so | vendor/lib64/camera/components/com.mi.node.tsskinbeautifier.so | vendor/lib64/camera/components/com.mi.node.videobokeh.so | vendor/lib64/camera/components/com.xiaomi.node.misv2.so | vendor/lib64/camera/plugins/com.xiaomi.plugin.skinbeautifier.so | vendor/lib64/camera/plugins/com.xiaomi.plugin.tsskinbeautifier.so | vendor/lib64/libqvrcamera_client.qti.so | vendor/lib64/libmialgoengine.so | vendor/lib64/libmis_plugin_vidhance.so | vendor/lib64/libcom.xiaomi.grallocutils.so | vendor/lib64/libmis_plugin_his.so | vendor/lib64/hw/camera.xiaomi.so)
-        "${PATCHELF}" --replace-needed "libui.so" "libui_camera.so" "${2}"
-        ;;
-        system/lib64/libcamera_mianode_jni.xiaomi.so|system/lib64/libcamera_algoup_jni.xiaomi.so|system/lib64/libmicampostproc_client.so)
-        "${PATCHELF}" --replace-needed "libui.so" "libui_camera.so" "${2}"
-        ;;
-    vendor/lib/libcodec2_hidl@1.0.stock.so)
-        "${PATCHELF}" --set-soname "libcodec2_hidl@1.0.stock.so" "${2}"
-        "${PATCHELF}" --replace-needed "libcodec2_vndk.so" "libcodec2_vndk.stock.so" "${2}"
-        ;;
-    vendor/lib/libcodec2_vndk.stock.so)
-        "${PATCHELF}" --set-soname "libcodec2_vndk.stock.so" "${2}"
-        ;;
     vendor/bin/hw/dolbycodec2 | vendor/bin/hw/vendor.dolby.hardware.dms@2.0-service | vendor/bin/hw/vendor.dolby.media.c2@1.0-service)
         "${PATCHELF}" --add-needed "libstagefright_foundation-v33.so" "${2}"
         ;;
@@ -205,6 +189,9 @@ function blob_fixup() {
         "${PATCHELF}" --remove-needed "libutils.so" "${2}"
         "${PATCHELF}" --add-needed "libutils-v32.so" "${2}"
         "${PATCHELF}" --add-needed "libutils-shim.so" "${2}"
+        ;;
+    vendor/bin/hw/mfp-daemon | vendor/lib64/hw/displayfeature.default.so)
+        "${PATCHELF}" --replace-needed "libstagefright_foundation.so" "libstagefright_foundation-v33.so" "${2}"
         ;;
     esac
 }
