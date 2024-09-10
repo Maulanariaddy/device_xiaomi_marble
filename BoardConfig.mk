@@ -25,7 +25,7 @@ TARGET_RECOVERY_DEVICE_MODULES ?= init_xiaomi_marble
 # Kernel modules
 BOOT_KERNEL_MODULES += \
     qcom_pm8008-regulator.ko \
-    goodix_core.ko \
+    gt9916r.ko \
     qcom-hv-haptics.ko \
     fpc1540.ko \
     goodix_3626.ko
