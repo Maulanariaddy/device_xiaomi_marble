@@ -7,8 +7,21 @@
 # Inherit from marble device
 $(call inherit-product, device/xiaomi/marble/device.mk)
 
-# Inherit from common lineage configuration
+# Inherit from common AlphaDroid configuration
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+
+# Mist Build stuff
+TARGET_BUILD_PACKAGE := 1
+TARGET_LAUNCHER := 1
+TARGET_ENABLE_BLUR := true
+TARGET_EXCLUDES_AUDIOFX := true
+TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_INCLUDE_MATLOG := true
+
+# Maintainer
+ALPHA_BUILD_TYPE := COMMUNITY
+ALPHA_MAINTAINER := MAULSxSMGREBORN
 
 PRODUCT_NAME := lineage_marble
 PRODUCT_DEVICE := marble
