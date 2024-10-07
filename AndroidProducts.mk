@@ -5,4 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_marble.mk
+    $(LOCAL_DIR)/genesis_marble.mk
+
+COMMON_LUNCH_CHOICES := \
+    genesis_marble-user \
+    genesis_marble-userdebug \
+    genesis_marble-eng

@@ -14,6 +14,21 @@ PRODUCT_NAME := lineage_marble
 PRODUCT_DEVICE := marble
 PRODUCT_MANUFACTURER := Xiaomi
 
+# Boot animation
+TARGET_BOOT_ANIMATION_RES := 1440
+
+# GenesisOS stuff.
+TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_GAPPS_ARCH := arm64
+TARGET_INCLUDE_CARRIER_SETTINGS := true
+TARGET_INCLUDE_LIVE_WALLPAPERS := true
+TARGET_SUPPORTS_GOOGLE_RECORDER := true
+TARGET_SUPPORTS_QUICK_TAP := true
+
+WITH_GAPPS := true
+
+GENESIS_COMMUNITY := true
+
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
 BUILD_FINGERPRINT := POCO/marble_global/marble:14/UKQ1.230804.001/V816.0.8.0.UMRMIXM:user/release-keys
 
