@@ -19,8 +19,8 @@ DEVICE_PATH := device/xiaomi/marble
 TARGET_OTA_ASSERT_DEVICE := marble,marblein
 
 # Init
-TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):init_xiaomi_marble
-TARGET_RECOVERY_DEVICE_MODULES ?= init_xiaomi_marble
+TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_marble
+TARGET_RECOVERY_DEVICE_MODULES := libinit_marble
 
 # Kernel modules
 BOOT_KERNEL_MODULES += \
