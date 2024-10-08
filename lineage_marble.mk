@@ -10,6 +10,14 @@ $(call inherit-product, device/xiaomi/marble/device.mk)
 # Inherit from common lineage configuration
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
+# Lineage Build stuff
+WITH_GMS := true
+TARGET_SUPPORTS_BLUR := true
+TARGET_BOOT_ANIMATION_RES := 1440
+TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_SUPPORTS_QUICK_TAP := true
+TARGET_DISABLE_EPPE := true
+
 PRODUCT_NAME := lineage_marble
 PRODUCT_DEVICE := marble
 PRODUCT_MANUFACTURER := Xiaomi
