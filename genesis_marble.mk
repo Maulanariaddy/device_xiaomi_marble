@@ -8,17 +8,22 @@
 $(call inherit-product, device/xiaomi/marble/device.mk)
 
 # Inherit from common lineage configuration
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/genesis/config/common_full_phone.mk)
 
-# Lineage Build stuff
-WITH_GMS := true
-TARGET_SUPPORTS_BLUR := true
-TARGET_BOOT_ANIMATION_RES := 1440
+# GenesisOS stuff.
 TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_GAPPS_ARCH := arm64
+TARGET_INCLUDE_CARRIER_SETTINGS := true
+TARGET_INCLUDE_LIVE_WALLPAPERS := true
+TARGET_SUPPORTS_GOOGLE_RECORDER := true
 TARGET_SUPPORTS_QUICK_TAP := true
-TARGET_DISABLE_EPPE := true
+WITH_GAPPS := true
+TARGET_BOOT_ANIMATION_RES := 1440
 
-PRODUCT_NAME := lineage_marble
+# OFFICIAL
+GENESIS_OFFICIAL := true
+
+PRODUCT_NAME := genesis_marble
 PRODUCT_DEVICE := marble
 PRODUCT_MANUFACTURER := Xiaomi
 
