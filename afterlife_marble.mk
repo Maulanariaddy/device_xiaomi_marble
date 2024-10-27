@@ -7,17 +7,23 @@
 # Inherit from marble device
 $(call inherit-product, device/xiaomi/marble/device.mk)
 
-# Inherit from common lineage configuration
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit from common Afterlife configuration
+$(call inherit-product, vendor/afterlife/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineage_marble
+# Afterlife Build stuff
+AFTERLIFE_MAINTAINER := MAULSxSMG
+TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_SUPPORTS_BLUR := true
+TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_PREBUILTS_LAWNICONS := true
+
+# Flags Afterlife
+AFTERLIFE_MAINTANER := true
+AFTERLIFE_BUILD_TYPE = OFFICIAL
+
+PRODUCT_NAME := afterlife_marble
 PRODUCT_DEVICE := marble
 PRODUCT_MANUFACTURER := Xiaomi
-PRODUCT_BRAND := POCO
-PRODUCT_MODEL := 23049PCD8G
-
-PRODUCT_SYSTEM_NAME := marble_global
-PRODUCT_SYSTEM_DEVICE := marble
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE=$(PRODUCT_SYSTEM_DEVICE) \
