@@ -4,9 +4,6 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# NFC
-TARGET_NFC_SUPPORTED_SKUS := marble
-
 # Inherit from MiuiCamera setup
 $(call inherit-product, device/xiaomi/miuicamera-marble/device.mk)
 
@@ -56,9 +53,16 @@ PRODUCT_PACKAGES += \
     WifiResMarble \
     WifiResMarbleCN \
 
+# Overlays - Packages
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay
+
 # Sensors
 PRODUCT_PACKAGES += \
     marbleLightSensor
+
+# NFC
+TARGET_NFC_SUPPORTED_SKUS := marble
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
