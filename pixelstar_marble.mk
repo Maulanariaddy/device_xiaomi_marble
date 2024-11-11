@@ -7,14 +7,28 @@
 # Inherit from marble device
 $(call inherit-product, device/xiaomi/marble/device.mk)
 
-# Inherit from common lineage configuration
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit from common pixelstar configuration
+$(call inherit-product, vendor/pixelstar/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineage_marble
+PRODUCT_NAME := pixelstar_marble
 PRODUCT_DEVICE := marble
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_BRAND := POCO
 PRODUCT_MODEL := 23049PCD8G
+
+# Additional
+TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_USES_BLUR_RECENT := false
+ADD_CUSTOM_APPS := true
+USE_PIXEL_CHARGER := true
+TARGET_INCLUDE_LIVE_WALLPAPERS := true
+TARGET_SUPPORTS_QUICK_TAP  := true
+PRODUCT_NO_CAMERA := true
+TARGET_INCLUDE_CARRIER_SETTINGS := true
+TARGET_SUPPORTS_PREBUILT_UPDATABLE_APEX := false
+TARGET_SUPPORTS_LILY_EXPERIENCE := true
+TARGET_SUPPORTS_GOOGLE_BATTERY := false
+TARGET_SUPPORTS_CLEAR_CALLING := true
 
 PRODUCT_SYSTEM_NAME := marble_global
 PRODUCT_SYSTEM_DEVICE := marble

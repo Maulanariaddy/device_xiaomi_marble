@@ -5,4 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_marble.mk
+    $(LOCAL_DIR)/pixelstar_marble.mk
+
+COMMON_LUNCH_CHOICES := \
+    pixelstar_marble-user \
+    pixelstar_marble-userdebug \
+    pixelstar_marble-eng
