@@ -12,9 +12,11 @@ $(call inherit-product, vendor/afterlife/config/common_full_phone.mk)
 
 # Afterlife Build stuff
 AFTERLIFE_MAINTAINER := MAULSxSMG
-TARGET_BOOT_ANIMATION_RES := 1440
+TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_SUPPORTS_BLUR := true
 TARGET_FACE_UNLOCK_SUPPORTED := true
+AFTERLIFE_GAPPS := true
+TARGET_PREBUILTS_LAWNICONS := true
 
 # Flags Afterlife
 AFTERLIFE_MAINTANER := true
