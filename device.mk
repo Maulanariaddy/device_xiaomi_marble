@@ -56,10 +56,6 @@ PRODUCT_PACKAGES += \
     WifiResMarble \
     WifiResMarbleCN \
 
-# Sensors
-PRODUCT_PACKAGES += \
-    marbleLightSensor
-
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
