@@ -8,13 +8,15 @@
 $(call inherit-product, device/xiaomi/marble/device.mk)
 
 # Inherit from common Mist configuration
-$(call inherit-product, vendor/mist/config/common_full_phone.mk)
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-PRODUCT_NAME := mist_marble
+PRODUCT_NAME := lineage_marble
 PRODUCT_DEVICE := marble
 PRODUCT_MANUFACTURER := Xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+
+BUILD_FINGERPRINT := POCO/marble_global/marble:14/UKQ1.230804.001/V816.0.9.0.UMRMIXM:user/release-keys
 
 # Mist Build stuff
 WITH_GMS := true
