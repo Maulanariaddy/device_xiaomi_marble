@@ -59,10 +59,6 @@ PRODUCT_PACKAGES += \
     WifiResMarble \
     WifiResMarbleCN \
 
-# Sensors
-PRODUCT_PACKAGES += \
-    marbleLightSensor
-
 # Overlays - Packages
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay
