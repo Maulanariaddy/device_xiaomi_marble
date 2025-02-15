@@ -1,22 +1,14 @@
 # All unpinned blobs below are extracted from marble V816.0.14.0.UMRMIXM
 
 # ACDB
-vendor/etc/acdbdata/Forte/Forte_acdb_cal.acdb
-vendor/etc/acdbdata/Forte/Forte_workspaceFileXml.qwsp
-vendor/etc/acdbdata/IDP_UPD/IDP_UPD_acdb_cal.acdb
-vendor/etc/acdbdata/IDP_UPD/IDP_UPD_workspaceFileXml.qwsp
+vendor/etc/acdbdata/Forte/Forte_acdb_cal.acdb:vendor/etc/acdbdata/ukee_mtp/Forte_acdb_cal.acdb
+vendor/etc/acdbdata/Forte/Forte_workspaceFileXml.qwsp:vendor/etc/acdbdata/ukee_mtp/Forte_workspaceFileXml.qwsp
 vendor/etc/acdbdata/nn_ns_models/fai__2.0.0_0.1__3.0.0_0.0__eai_1.36_enpu2.pmd
 vendor/etc/acdbdata/nn_ns_models/fai__2.3.0_0.1__3.0.0_0.0__eai_1.10.pmd
 vendor/etc/acdbdata/nn_ns_models/fai__2.3.0_0.1__3.0.0_0.0__eai_1.36_enpu2_comp.pmd
 vendor/etc/acdbdata/nn_ns_models/fai__2.7.20_0.0__3.0.0_0.0__eai_1.36_enpu2.pmd
 vendor/etc/acdbdata/nn_ns_models/fai__2.7.2_0.0__3.0.0_0.0__eai_1.36_enpu2.pmd
 vendor/etc/acdbdata/nn_vad_models/fai__3.0.0_0.0__eai_1.36_enpu2.pmd
-vendor/etc/acdbdata/ukee_cdp/CDP_ukee_acdb_cal.acdb
-vendor/etc/acdbdata/ukee_cdp/CDP_ukee_workspaceFileXml.qwsp
-vendor/etc/acdbdata/ukee_mtp/MTP_ukee_acdb_cal.acdb
-vendor/etc/acdbdata/ukee_mtp/MTP_ukee_workspaceFileXml.qwsp
-vendor/etc/acdbdata/ukee_qrd/QRD_ukee_acdb_cal.acdb
-vendor/etc/acdbdata/ukee_qrd/QRD_ukee_workspaceFileXml.qwsp
 
 # ADSP modules
 vendor/lib/rfsa/adsp/bm2n00.bin
@@ -103,18 +95,6 @@ vendor/lib/rfsa/adsp/misound_res_headphone.bin
 vendor/lib/rfsa/adsp/misound_res_spk.bin
 vendor/lib/rfsa/adsp/misound_res_spk4ch.bin
 
-# Audio configs
-vendor/etc/audio/sku_ukee/mixer_paths_overlay_dynamic.xml
-vendor/etc/audio/sku_ukee/mixer_paths_overlay_static.xml
-vendor/etc/audio/sku_ukee/mixer_paths_ukee_mtp.xml
-vendor/etc/audio/sku_ukee/resourcemanager_ukee_mtp.xml
-vendor/etc/audio_cloud_control_white_list.xml
-vendor/etc/backend_conf.xml
-vendor/etc/card-defs.xml
-vendor/etc/kvh2xml.xml
-vendor/etc/microphone_characteristics.xml
-vendor/etc/usecaseKvManager.xml
-
 # Audio
 # audio.primary.taro depends on vendor.qti.hardware.pal@1.0-impl, which is a gnu makefile target
 vendor/lib64/hw/audio.primary.taro.so:vendor/lib64/hw/audio.primary.taro-marble.so;DISABLE_CHECKELF
@@ -122,7 +102,6 @@ vendor/lib64/libagm.so
 # libar-pal depends on libagmclient, which is a gnu makefile target
 vendor/lib64/libar-pal.so;DISABLE_CHECKELF
 # libawcal depends on libagmmixer, which is a gnu makefile target
-vendor/lib64/libawcal.so;DISABLE_CHECKELF
 vendor/lib64/libkaraokepal.so
 
 # Audio firmware
