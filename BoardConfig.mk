@@ -43,6 +43,5 @@ TARGET_SCREEN_DENSITY := 440
 TARGET_CAMERA_PACKAGE_NAME := com.android.camera
 
 # Vibrator
-SOONG_CONFIG_NAMESPACES += XIAOMI_VIBRATOR
-SOONG_CONFIG_XIAOMI_VIBRATOR := USE_EFFECT_STREAM
-SOONG_CONFIG_XIAOMI_VIBRATOR_USE_EFFECT_STREAM := true
+$(call soong_config_set,qti_vibrator,effect_lib,libqtivibratoreffect.xiaomi)
+$(call soong_config_set,qti_vibrator,use_effect_stream,true)
