@@ -8,13 +8,20 @@
 $(call inherit-product, device/xiaomi/marble/device.mk)
 
 # Inherit from common lineage configuration
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/komodo/config/common_full_phone.mk)
 
-PRODUCT_NAME := lineage_marble
+PRODUCT_NAME := komodo_marble
 PRODUCT_DEVICE := marble
 PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_BRAND := POCO
 PRODUCT_MODEL := 23049PCD8G
+
+# Komodo Dragonized
+KOMODO_OFFICIAL := true
+KOMODO_MAINTAINER := Mauls
+TARGET_BOOT_ANIMATION_RES := 1080
+TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_ENABLE_BLUR := false
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     BuildDesc="marble_global-user 14 UKQ1.230804.001 V816.0.14.0.UMRMIXM release-keys" \
