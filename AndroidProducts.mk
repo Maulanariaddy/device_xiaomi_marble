@@ -5,9 +5,9 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/horizon_marble.mk
+    $(LOCAL_DIR)/komodo_marble.mk
 
 COMMON_LUNCH_CHOICES := \
-    horizon_marble-user \
-    horizon_marble-userdebug \
-    horizon_marble-eng
+    komodo_marble-user \
+    komodo_marble-userdebug \
+    komodo_marble-eng
